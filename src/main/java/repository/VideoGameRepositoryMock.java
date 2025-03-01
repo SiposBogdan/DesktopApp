@@ -28,7 +28,6 @@ public class VideoGameRepositoryMock implements VideoGameReposistory{
     }
 
     @Override
-    public int removeAll() {
-        return 0;
+    public void removeAll() {
     }
 }
