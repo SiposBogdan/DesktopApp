@@ -9,5 +9,6 @@ public interface VideoGameService {
     VideoGame findById(Long id);
     boolean save (VideoGame game);
     boolean delete(VideoGame game);
+    void removeAll();
     int getAgeOfGame(Long id);
 }
