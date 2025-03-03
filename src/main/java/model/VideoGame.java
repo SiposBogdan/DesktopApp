@@ -3,17 +3,35 @@ package model;
 import java.time.LocalDate;
 
 public class VideoGame {
-    private long id;
+    private Long id;
     private String title;
     private String publisher;
     private LocalDate publishedDate;
     private GameGenres genre;
+    private Integer stock;
+    private Float price;
 
-    public long getId() {
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,7 +73,7 @@ public class VideoGame {
                 ", title='" + title + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", publishedDate=" + publishedDate +
-                ", genre=" + genre +
-                '}';
+                ", genre=" + genre + ", Stock: " + stock +
+                " Price: " + price+"}";
     }
 }

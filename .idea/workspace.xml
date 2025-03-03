@@ -4,26 +4,72 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fbbb56d-7962-4817-b968-10e0b0ad94e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controller/VideoGameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/launcher/ComponentFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/launcher/Launcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/launcher/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/mapper/VideoGameMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/service/VideoGameServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/VideoGameView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/model/VideoGameDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/model/builder/VideoGameDTOBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/VideoGameRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="3fbbb56d-7962-4817-b968-10e0b0ad94e9" name="Changes" comment="first draft">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/database/Bootstrap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/database/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/database/SQLTableCreationFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/launcher/AdminComponentFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/launcher/EmployeeComponentFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/launcher/LoginComponentFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/mapper/AdminMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Right.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/builder/OrderBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/builder/UserBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/validation/Notification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/validation/ResultFetchException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/validation/UserValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/admin/AdminRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/admin/AdminRepositoryMySQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/order/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/order/OrderRepositoryMySQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/pdf/PDFGenerateMySQLRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/pdf/PDFGenerateRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/sale/SaleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/sale/SaleRepositoryMySQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/security/RightsRolesRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/security/RightsRolesRepositoryMySQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/user/UserRepositoryMySQL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/videoGame/Cache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/videoGame/VideoGameRepositoryCacheDecorator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/repository/videoGame/VideoGameRepositoryDecorator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/PDFGenerator/PDFService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/PDFGenerator/PDFServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/admin/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/admin/AdminServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/order/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/order/OrderServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/user/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/service/user/AuthenticationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/AdminView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/model/AdminDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/model/builder/AdminDTOBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/VideoGameReposistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/VideoGameReposistory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/VideoGameRepositoryMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/VideoGameRepositoryMock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/VideoGameRepositoryMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/VideoGameRepositoryMySQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/VideoGameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/VideoGameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/VideoGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/VideoGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/JDBConnectionWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/JDBConnectionWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/launcher/ComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/launcher/ComponentFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/launcher/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/launcher/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/mapper/VideoGameMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/mapper/VideoGameMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/VideoGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/VideoGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/builder/VideoGameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/builder/VideoGameBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/VideoGameReposistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/videoGame/VideoGameRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/VideoGameRepositoryMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/videoGame/VideoGameRepositoryMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/VideoGameRepositoryMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/videoGame/VideoGameRepositoryMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/VideoGameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/videoGame/VideoGameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/service/VideoGameServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/videoGame/VideoGameServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/VideoGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/VideoGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/model/VideoGameDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/model/VideoGameDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/model/builder/VideoGameDTOBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/model/builder/VideoGameDTOBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/VideoGameRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/VideoGameRepositoryTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,38 +99,79 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2taaOqOFDArTD52FQJfmUpyVuIT" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/desktopApp/SportApp/VideoGameStore&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;D:/desktopApp/SportApp/VideoGameStore/src/main/java/org/example/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/desktopApp/Barnea/Library1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "D:/desktopApp/SportApp/VideoGameStore/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="model.validation" />
+    </key>
+  </component>
   <component name="RunManager" selected="Gradle.VideoGameStore [run]">
+    <configuration name="VideoGameStore [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="VideoGameStore [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -129,6 +216,28 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
+    <configuration name="VideoGameStore [runShadow]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runShadow" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="VideoGameStore [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -155,7 +264,9 @@
       <list>
         <item itemvalue="Gradle.VideoGameStore [run]" />
         <item itemvalue="Gradle.VideoGameStore [build]" />
+        <item itemvalue="Gradle.VideoGameStore [assemble]" />
         <item itemvalue="Gradle.VideoGameStore [clean]" />
+        <item itemvalue="Gradle.VideoGameStore [runShadow]" />
       </list>
     </recent_temporary>
   </component>
@@ -170,12 +281,47 @@
       <workItem from="1740592617854" duration="1000" />
       <workItem from="1740641034779" duration="774000" />
       <workItem from="1740766683893" duration="13930000" />
-      <workItem from="1740825654367" duration="646000" />
+      <workItem from="1740825654367" duration="24935000" />
+      <workItem from="1740902052482" duration="5958000" />
+      <workItem from="1740993516207" duration="5820000" />
+      <workItem from="1740999676873" duration="24674000" />
     </task>
+    <task id="LOCAL-00001" summary="first draft">
+      <option name="closed" value="true" />
+      <created>1740835087072</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740835087072</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first draft">
+      <option name="closed" value="true" />
+      <created>1740835309815</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1740835309815</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first draft" />
+    <option name="LAST_COMMIT_MESSAGE" value="first draft" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

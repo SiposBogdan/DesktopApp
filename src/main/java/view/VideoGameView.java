@@ -29,14 +29,21 @@ public class VideoGameView {
     private final ObservableList<VideoGameDTO> videoGameObservableList;
     private TextField publisherTextField;
     private TextField titleTextField;
+    private TextField stockTextField;
+    private TextField priceTextField;
+    private TextField quantityTextField;
     private TextField genreTextField;
     private Label publisherLabel;
     private Label titleLabel;
     private Label genreLabel;
+    private Label stockLabel;
+    private Label priceLabel;
+    private Label quantityLabel;
     private ComboBox<String> genreComboBox;
 
     private Button saveButton;
     private Button deleteButton;
+    private Button sellButton;
 
     public VideoGameView(Stage primaryStage, List<VideoGameDTO> videoGames) {
         primaryStage.setTitle("Store");
@@ -72,11 +79,16 @@ public class VideoGameView {
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         TableColumn<VideoGameDTO, String> genreColumn = new TableColumn<VideoGameDTO, String>("Genre");
         genreColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        TableColumn<VideoGameDTO, Integer> stockColumn = new TableColumn<>("Stock");
+        stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        TableColumn<VideoGameDTO, Float> priceColumn = new TableColumn<>("Price");
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        videoGameTableView.getColumns().addAll(titleColumn, publisherColumn, genreColumn);
+        videoGameTableView.getColumns().addAll(titleColumn, publisherColumn, genreColumn, stockColumn, priceColumn);
+
         videoGameTableView.setItems(videoGameObservableList);
 
-        gridPane.add(videoGameTableView, 0, 0, 7, 1);
+        gridPane.add(videoGameTableView, 0, 0, 8, 1);
 
     }
 
@@ -102,6 +114,26 @@ public class VideoGameView {
                 .toList()));
         gridPane.add(genreComboBox, 6, 1);
 
+        stockLabel = new Label("Stock");
+        gridPane.add(stockLabel, 1, 2);
+
+        stockTextField = new TextField();
+        gridPane.add(stockTextField, 2, 2);
+
+        priceLabel = new Label("Price");
+        gridPane.add(priceLabel, 3, 2);
+
+        priceTextField = new TextField();
+        gridPane.add(priceTextField, 4, 2);
+
+        quantityLabel = new Label("Quantity");
+        gridPane.add(quantityLabel, 1, 3);
+        quantityTextField = new TextField();
+        gridPane.add(quantityTextField, 2, 3);
+
+
+
+
 //        genreTextField = new TextField();
 //        gridPane.add(genreTextField, 6, 1);
 
@@ -110,6 +142,9 @@ public class VideoGameView {
 
         deleteButton = new Button("Delete");
         gridPane.add(deleteButton, 8, 1);
+
+        sellButton = new Button("Sell");
+        gridPane.add(sellButton,3,3);
     }
     public void addSaveButtonListener(EventHandler<ActionEvent> saveButtonListener){
         saveButton.setOnAction(saveButtonListener);
@@ -118,7 +153,10 @@ public class VideoGameView {
     public void addDeleteButtonListener(EventHandler<ActionEvent> deleteButtonListener){
         deleteButton.setOnAction(deleteButtonListener);
     }
-
+    public void addSellButtonListener(EventHandler<ActionEvent> sellButtonListener)
+    {
+        sellButton.setOnAction(sellButtonListener);
+    }
     public void addDisplayAlertMessage(String title, String header, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -136,6 +174,17 @@ public class VideoGameView {
     public String getGenre () {
 //        return genreTextField.getText();
         return genreComboBox.getValue();
+    }
+    public int getStock() {
+        return Integer.parseInt(stockTextField.getText());
+    }
+
+    public float getPrice() {
+        return Float.parseFloat(priceTextField.getText());
+    }
+    public int getQuantity()
+    {
+        return Integer.parseInt(quantityTextField.getText());
     }
 
     public void addVideoGameToObservableList(VideoGameDTO videoGameDTO){

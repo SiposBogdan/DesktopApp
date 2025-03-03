@@ -1,7 +1,6 @@
 package view.model;
 
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 
 public class VideoGameDTO {
      private StringProperty publisher;
@@ -48,5 +47,38 @@ public class VideoGameDTO {
             genre = new SimpleStringProperty(this, "genre");
         }
         return genre;
+    }
+    private IntegerProperty stock;
+    public IntegerProperty stockProperty(){
+        if(stock==null)
+        {
+            stock= new SimpleIntegerProperty(this,"stock");
+        }
+        return stock;
+    }
+    public int getStock()
+    {
+        return stockProperty().get();
+    }
+    public void setStock(int stock)
+    {
+        stockProperty().set(stock);
+    }
+
+    private FloatProperty price;
+    public FloatProperty priceProperty(){
+        if(price==null)
+        {
+            price= new SimpleFloatProperty(this,"price");
+        }
+        return price;
+    }
+    public float getPrice()
+    {
+        return priceProperty().get();
+    }
+    public void setPrice(float price)
+    {
+        priceProperty().set(price);
     }
 }

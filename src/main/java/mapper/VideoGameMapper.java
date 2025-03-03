@@ -13,11 +13,12 @@ import java.util.stream.Collectors;
 
 public class VideoGameMapper {
     public static VideoGameDTO convertVideoGameToVideoGameDTO(VideoGame videoGame){
-        return new VideoGameDTOBuilder().setTitle(videoGame.getTitle()).setPublisher(videoGame.getPublisher()).setGenre(videoGame.getGenre().toString()).build();
+        return new VideoGameDTOBuilder().setTitle(videoGame.getTitle()).setPublisher(videoGame.getPublisher()).setGenre(videoGame.getGenre().toString()).setStock(videoGame.getStock()).setPrice(videoGame.getPrice()).build();
+
     }
 
     public static VideoGame convertVideoGameDTOToVideoGame(VideoGameDTO videoGameDTO){
-        return new VideoGameBuilder().setTitle(videoGameDTO.getTitle()).setPublisher(videoGameDTO.getPublisher()).setGenre(GameGenres.valueOf(videoGameDTO.getGenre())).setPublishedDate(LocalDate.of(2025,1,1)).build();
+        return new VideoGameBuilder().setTitle(videoGameDTO.getTitle()).setPublisher(videoGameDTO.getPublisher()).setGenre(GameGenres.valueOf(videoGameDTO.getGenre())).setPublishedDate(LocalDate.of(2025,1,1)).setStock(videoGameDTO.getStock()).setPrice(videoGameDTO.getPrice()).build();
     }
 
     public static List<VideoGameDTO> convertVideoGameListToVideoGameDTOList(List<VideoGame> videoGames){
