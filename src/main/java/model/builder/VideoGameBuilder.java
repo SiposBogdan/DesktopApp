@@ -10,7 +10,16 @@ public class VideoGameBuilder {
     public VideoGameBuilder(){
         game = new VideoGame();
     }
-
+    public VideoGameBuilder setStock(int stock)
+    {
+        game.setStock(stock);
+        return this;
+    }
+    public VideoGameBuilder setPrice(float price)
+    {
+        game.setPrice(price);
+        return this;
+    }
     public VideoGameBuilder setId(Long id){
         game.setId(id);
         return this;

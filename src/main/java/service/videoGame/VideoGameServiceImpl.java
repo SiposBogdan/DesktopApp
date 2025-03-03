@@ -1,7 +1,8 @@
-package service;
+package service.videoGame;
 
 import model.VideoGame;
-import repository.VideoGameReposistory;
+import repository.sale.SaleRepository;
+import repository.videoGame.VideoGameRepository;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -9,42 +10,43 @@ import java.util.List;
 
 public class VideoGameServiceImpl implements VideoGameService{
 
-    private final VideoGameReposistory gameReposistory;
+    private final VideoGameRepository gameRepository;
 
-    public VideoGameServiceImpl(VideoGameReposistory gameReposistory){
-        this.gameReposistory = gameReposistory;
+    public VideoGameServiceImpl(VideoGameRepository gameRepository){
+        this.gameRepository = gameRepository;
     }
     @Override
     public List<VideoGame> findAll() {
-        return gameReposistory.findAll();
+        return gameRepository.findAll();
     }
 
     @Override
     public VideoGame findById(Long id) {
-        return gameReposistory.findById(id)
+        return gameRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("The video game with id: %id was not found".formatted(id)));
 
     }
-
     @Override
     public boolean save(VideoGame game) {
-        return gameReposistory.save(game);
+        return gameRepository.save(game);
     }
-
     @Override
     public boolean delete(VideoGame game) {
-        return gameReposistory.delete(game);
+        return gameRepository.delete(game);
     }
-
     @Override
     public void removeAll() {
-        gameReposistory.removeAll();
+        gameRepository.removeAll();
     }
-
     @Override
     public int getAgeOfGame(Long id) {
         VideoGame game = this.findById(id);
         LocalDate currentDate = LocalDate.now();
         return (int) ChronoUnit.YEARS.between(currentDate, game.getPublishedDate());
     }
+    @Override
+    public boolean update(VideoGame videoGame, int newStock) {
+        return gameRepository.update(videoGame,newStock);
+    }
+
 }

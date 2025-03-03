@@ -1,4 +1,4 @@
-package repository;
+package repository.videoGame;
 
 import model.GameGenres;
 import model.VideoGame;
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class VideoGameRepositoryMySQL implements VideoGameReposistory{
-
+public class VideoGameRepositoryMySQL implements VideoGameRepository{
+    private String videoGameName;
     private final Connection connection;
     public VideoGameRepositoryMySQL(Connection connection){
         this.connection = connection;
@@ -57,7 +57,7 @@ public class VideoGameRepositoryMySQL implements VideoGameReposistory{
 
     @Override
     public boolean save(VideoGame game) {
-        String newSql = "INSERT INTO video_game (title, publisher, publishedDate, genre) VALUES (?, ?, ?, ?);";
+        String newSql = "INSERT INTO video_game (title, publisher, publishedDate, genre, stock,price) VALUES (?, ?, ?, ?,?,?);";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(newSql);
@@ -65,7 +65,8 @@ public class VideoGameRepositoryMySQL implements VideoGameReposistory{
             preparedStatement.setString(2, game.getPublisher());
             preparedStatement.setDate(3, java.sql.Date.valueOf(game.getPublishedDate()));
             preparedStatement.setString(4, game.getGenre().name()); // Convert Enum to String
-
+            preparedStatement.setInt(5,game.getStock());
+            preparedStatement.setFloat(6,game.getPrice());
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted == 1;
 
@@ -105,6 +106,25 @@ public class VideoGameRepositoryMySQL implements VideoGameReposistory{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean update(VideoGame videoGame,int newStockValue) {
+
+        String newSql = "update video_game set stock = ? where title = ? and publisher = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(newSql)) {
+            preparedStatement.setInt(1,newStockValue );
+            preparedStatement.setString(2, videoGame.getTitle());
+            preparedStatement.setString(3, videoGame.getPublisher());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     private VideoGame getVideoGameFromResultSet(ResultSet resultSet) throws Exception{
         return new VideoGameBuilder()
                 .setId(resultSet.getLong("id"))
@@ -112,7 +132,11 @@ public class VideoGameRepositoryMySQL implements VideoGameReposistory{
                 .setPublisher(resultSet.getString("publisher"))
                 .setPublishedDate(new java.sql.Date(resultSet.getDate("publishedDate").getTime()).toLocalDate())
                 .setGenre(GameGenres.valueOf(resultSet.getString("genre")))
+                .setStock(resultSet.getInt("stock"))
+                .setPrice(resultSet.getFloat("price"))
                 .build();
 
     }
+
+
 }

@@ -21,6 +21,16 @@ public class VideoGameDTOBuilder {
         videoGameDTO.setGenre(genre);
         return this;
     }
+    public VideoGameDTOBuilder setStock(int stock)
+    {
+        videoGameDTO.setStock(stock);
+        return this;
+    }
+    public VideoGameDTOBuilder setPrice(float price)
+    {
+        videoGameDTO.setPrice(price);
+        return this;
+    }
     public VideoGameDTO build(){
         return videoGameDTO;
     }

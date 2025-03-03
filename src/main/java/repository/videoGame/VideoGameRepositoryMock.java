@@ -1,11 +1,11 @@
-package repository;
+package repository.videoGame;
 
 import model.VideoGame;
 
 import java.util.List;
 import java.util.Optional;
 
-public class VideoGameRepositoryMock implements VideoGameReposistory{
+public class VideoGameRepositoryMock implements VideoGameRepository{
 
     @Override
     public List<VideoGame> findAll() {
@@ -27,7 +27,14 @@ public class VideoGameRepositoryMock implements VideoGameReposistory{
         return false;
     }
 
+
     @Override
     public void removeAll() {
     }
+
+    @Override
+    public boolean update(VideoGame videoGame, int newStock) {
+        return false;
+    }
+
 }
