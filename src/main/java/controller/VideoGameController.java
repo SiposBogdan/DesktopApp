@@ -60,16 +60,29 @@ public class VideoGameController {
            if (title.isEmpty() || publisher.isEmpty() || genre.isEmpty()) {
                videoGameView.addDisplayAlertMessage("Save Error", "Problem at Title or Publisher or Genre fields", "Can not have an empty Title or Publisher or Genre field.");
            } else {
-               VideoGameDTO videoGameDTO = new VideoGameDTOBuilder().setTitle(title).setPublisher(publisher).setGenre(genre).setStock(stock).setPrice(price).build();
-
-
-               boolean savedVideoGame = videoGameService.save(VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO));
-
-               if (savedVideoGame) {
-                   videoGameView.addDisplayAlertMessage("Save Successful", "Video game Added", "Video Game was successfully added to the database.");
-                   videoGameView.addVideoGameToObservableList(videoGameDTO);
+               if (stock < 0) {
+                   videoGameView.addDisplayAlertMessage("Save Error", "Invalid Stock Value",
+                           "Stock must be a non-negative integer.");
                } else {
-                   videoGameView.addDisplayAlertMessage("Save Error", "Problem at adding Video Game", "There was a problem at adding the video game to the database. Please try again!");
+
+                   // Validate price (should be a positive float)
+                   if (price < 0) {
+                       videoGameView.addDisplayAlertMessage("Save Error", "Invalid Price Value",
+                               "Price must be a non-negative number.");
+                   } else {
+
+                       VideoGameDTO videoGameDTO = new VideoGameDTOBuilder().setTitle(title).setPublisher(publisher).setGenre(genre).setStock(stock).setPrice(price).build();
+
+
+                       boolean savedVideoGame = videoGameService.save(VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO));
+
+                       if (savedVideoGame) {
+                           videoGameView.addDisplayAlertMessage("Save Successful", "Video game Added", "Video Game was successfully added to the database.");
+                           videoGameView.addVideoGameToObservableList(videoGameDTO);
+                       } else {
+                           videoGameView.addDisplayAlertMessage("Save Error", "Problem at adding Video Game", "There was a problem at adding the video game to the database. Please try again!");
+                       }
+                   }
                }
            }
        }
@@ -93,46 +106,53 @@ public class VideoGameController {
                }
            }
        }
-    private class SellButtonListener implements EventHandler<ActionEvent>{
+    private class SellButtonListener implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
             VideoGameDTO videoGameDTO = (VideoGameDTO) videoGameView.getVideoGameTableView().getSelectionModel().getSelectedItem();
             VideoGameDTO oldVideoGameDTO = videoGameDTO;
+            if (videoGameView.getQuantity() < 0) {
+                videoGameView.addDisplayAlertMessage("Order Error", "Invalid Quantity Value", "Price must be a non-negative number."
+                );
 
-            if (videoGameDTO != null) {
-                boolean updateSuccessful = TRUE;
-                if(videoGameDTO.getStock() < videoGameView.getQuantity()){
-                    videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was not enough stock.");
-                }
-                else {
-                    updateSuccessful = videoGameService.update(
-                            VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO),
-                            videoGameDTO.getStock() - videoGameView.getQuantity()
-                    );
-
-
-                    if (updateSuccessful) {
-                        Order order = new OrderBuilder()
-                                .setId(null)
-                                .setVideoGameTitle(videoGameDTO.getTitle())
-                                .setVideoGamePublisher(videoGameDTO.getPublisher())
-                                .setTimestamp(Timestamp.from(Instant.now()))
-                                .setQuantity(videoGameView.getQuantity())
-                                .setUserId(user.getId())
-                                .build();
-
-                        orderService.save(order);
-                        videoGameView.updateVideoGameToObservableList(videoGameDTO, videoGameDTO.getStock() - videoGameView.getQuantity());
-                        videoGameView.addDisplayAlertMessage("Success", "Order Created", "The video game order was successfully made!");
-                    } else {
-                        videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was a problem with the order. Please try again.");
-                    }
-                }
             } else {
-                videoGameView.addDisplayAlertMessage("Order Error", "Problem at updating video game", "");
-            }
-        }
+                if (videoGameDTO != null) {
+                    boolean updateSuccessful = TRUE;
 
+                    if (videoGameDTO.getStock() < videoGameView.getQuantity()) {
+                        videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was not enough stock.");
+                    } else {
+
+                        updateSuccessful = videoGameService.update(
+                                VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO),
+                                videoGameDTO.getStock() - videoGameView.getQuantity()
+                        );
+
+
+                        if (updateSuccessful) {
+                            Order order = new OrderBuilder()
+                                    .setId(null)
+                                    .setVideoGameTitle(videoGameDTO.getTitle())
+                                    .setVideoGamePublisher(videoGameDTO.getPublisher())
+                                    .setTimestamp(Timestamp.from(Instant.now()))
+                                    .setQuantity(videoGameView.getQuantity())
+                                    .setUserId(user.getId())
+                                    .build();
+
+                            orderService.save(order);
+                            videoGameView.updateVideoGameToObservableList(videoGameDTO, videoGameDTO.getStock() - videoGameView.getQuantity());
+                            videoGameView.addDisplayAlertMessage("Success", "Order Created", "The video game order was successfully made!");
+                        } else {
+                            videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was a problem with the order. Please try again.");
+                        }
+                    }
+
+                } else {
+                    videoGameView.addDisplayAlertMessage("Order Error", "Problem at updating video game", "");
+                }
+            }
+
+        }
     }
     public class LogoutButtonListener implements EventHandler<ActionEvent> {
         @Override

@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fbbb56d-7962-4817-b968-10e0b0ad94e9" name="Changes" comment="third draft with costumer, admin and employee">
+    <list default="true" id="3fbbb56d-7962-4817-b968-10e0b0ad94e9" name="Changes" comment="final draft">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/order/OrderRepositoryMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/order/OrderRepositoryMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/VideoGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/VideoGameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/pdf/PDFGenerateMySQLRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/pdf/PDFGenerateMySQLRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/pdf/PDFGenerateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/pdf/PDFGenerateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/PDFGenerator/PDFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/PDFGenerator/PDFService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/PDFGenerator/PDFServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/PDFGenerator/PDFServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/order/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/order/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/order/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/order/OrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/AdminView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/AdminView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/sale/SaleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/sale/SaleRepositoryMySQL.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/VideoGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/VideoGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +225,7 @@
       <workItem from="1740825654367" duration="24935000" />
       <workItem from="1740902052482" duration="5958000" />
       <workItem from="1740993516207" duration="5820000" />
-      <workItem from="1740999676873" duration="44047000" />
+      <workItem from="1740999676873" duration="46849000" />
     </task>
     <task id="LOCAL-00001" summary="first draft">
       <option name="closed" value="true" />
@@ -263,7 +259,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741054836117</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="final draft">
+      <option name="closed" value="true" />
+      <created>1741058787501</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741058787501</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +288,8 @@
     <MESSAGE value="first draft" />
     <MESSAGE value="second draft" />
     <MESSAGE value="third draft with costumer, admin and employee" />
-    <option name="LAST_COMMIT_MESSAGE" value="third draft with costumer, admin and employee" />
+    <MESSAGE value="final draft" />
+    <option name="LAST_COMMIT_MESSAGE" value="final draft" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
