@@ -61,8 +61,8 @@ public class LoginController {
                 {
 
                     case ADMINISTRATOR -> AdminComponentFactory.getInstance(componentsForTest,loginView.getStage());
-                    case CUSTOMER -> EmployeeComponentFactory.getInstance(componentsForTest,loginView.getStage(),user);
-                    case EMPLOYEE -> EmployeeComponentFactory.getInstance(componentsForTest,loginView.getStage(),user) ;
+                    case CUSTOMER -> EmployeeComponentFactory.getInstance(componentsForTest,loginView.getStage(),user,authenticationService);
+                    case EMPLOYEE -> EmployeeComponentFactory.getInstance(componentsForTest,loginView.getStage(),user,authenticationService) ;
 
                 }
 
@@ -92,4 +92,5 @@ public class LoginController {
 
         }
     }
+
 }

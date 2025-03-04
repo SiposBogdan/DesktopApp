@@ -2,12 +2,21 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
+import launcher.AdminComponentFactory;
+import launcher.EmployeeComponentFactory;
 import mapper.VideoGameMapper;
 import model.Order;
 import model.User;
 import model.builder.OrderBuilder;
 import service.order.OrderService;
+import service.user.AuthenticationService;
+import service.user.AuthenticationServiceImpl;
 import service.videoGame.VideoGameService;
+import view.LoginView;
 import view.VideoGameView;
 import view.model.VideoGameDTO;
 import view.model.builder.VideoGameDTOBuilder;
@@ -15,21 +24,29 @@ import view.model.builder.VideoGameDTOBuilder;
 import java.sql.Timestamp;
 import java.time.Instant;
 
+import static java.lang.Boolean.TRUE;
+
+
 public class VideoGameController {
 
    private final VideoGameView videoGameView;
    private final VideoGameService videoGameService;
     private final OrderService orderService;
     private final User user;
-   public VideoGameController(VideoGameService videoGameService, VideoGameView videoGameView,OrderService orderService, User user){
+    private final AuthenticationService authenticationService;
+
+
+    public VideoGameController(VideoGameService videoGameService, VideoGameView videoGameView,OrderService orderService, User user, AuthenticationService authenticationService){
        this.user = user;
        this.videoGameView = videoGameView;
        this.videoGameService = videoGameService;
        this.orderService = orderService;
+       this.authenticationService = authenticationService;
 
        this.videoGameView.addSaveButtonListener(new SaveButtonListener());
        this.videoGameView.addDeleteButtonListener(new DeleteButtonListener());
        this.videoGameView.addSellButtonListener(new SellButtonListener());
+       this.videoGameView.addLogoutButtonListener(new LogoutButtonListener());
    }
    private class SaveButtonListener implements EventHandler<ActionEvent> {
        @Override
@@ -83,25 +100,33 @@ public class VideoGameController {
             VideoGameDTO oldVideoGameDTO = videoGameDTO;
 
             if (videoGameDTO != null) {
-                boolean updateSuccessful = videoGameService.update(
-                        VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO),
-                        VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO).getStock() - videoGameView.getQuantity()
-                );
+                boolean updateSuccessful = TRUE;
+                if(videoGameDTO.getStock() < videoGameView.getQuantity()){
+                    videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was not enough stock.");
+                }
+                else {
+                    updateSuccessful = videoGameService.update(
+                            VideoGameMapper.convertVideoGameDTOToVideoGame(videoGameDTO),
+                            videoGameDTO.getStock() - videoGameView.getQuantity()
+                    );
 
-                if (updateSuccessful) {
-                    Order order = new OrderBuilder()
-                            .setId(null)
-                            .setVideoGameTitle(videoGameDTO.getTitle())
-                            .setVideoGamePublisher(videoGameDTO.getPublisher())
-                            .setTimestamp(Timestamp.from(Instant.now()))
-                            .setQuantity(videoGameView.getQuantity())
-                            .setUserId(user.getId())
-                            .build();
 
-                    orderService.save(order);
-                    videoGameView.addDisplayAlertMessage("Success", "Order Created", "The video game order was successfully made!");
-                } else {
-                    videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was a problem with the order. Please try again.");
+                    if (updateSuccessful) {
+                        Order order = new OrderBuilder()
+                                .setId(null)
+                                .setVideoGameTitle(videoGameDTO.getTitle())
+                                .setVideoGamePublisher(videoGameDTO.getPublisher())
+                                .setTimestamp(Timestamp.from(Instant.now()))
+                                .setQuantity(videoGameView.getQuantity())
+                                .setUserId(user.getId())
+                                .build();
+
+                        orderService.save(order);
+                        videoGameView.updateVideoGameToObservableList(videoGameDTO, videoGameDTO.getStock() - videoGameView.getQuantity());
+                        videoGameView.addDisplayAlertMessage("Success", "Order Created", "The video game order was successfully made!");
+                    } else {
+                        videoGameView.addDisplayAlertMessage("Order Error", "Problem at ordering", "There was a problem with the order. Please try again.");
+                    }
                 }
             } else {
                 videoGameView.addDisplayAlertMessage("Order Error", "Problem at updating video game", "");
@@ -109,6 +134,33 @@ public class VideoGameController {
         }
 
     }
+    public class LogoutButtonListener implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Logout Confirmation");
+            alert.setHeaderText("Are you sure you want to log out?");
+            alert.setContentText("Your session will be closed.");
+
+            ButtonType confirmButton = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancelButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(confirmButton, cancelButton);
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == confirmButton) {
+                    Stage currentStage = (Stage) videoGameView.getVideoGameTableView().getScene().getWindow();
+                    currentStage.close();
+                    EmployeeComponentFactory.resetInstance();
+
+                    Stage loginStage = new Stage();
+                    LoginView loginView = new LoginView(loginStage);
+
+                    new LoginController(loginView, authenticationService, false);
+                }
+            });
+        }
+    }
+
 
 
 

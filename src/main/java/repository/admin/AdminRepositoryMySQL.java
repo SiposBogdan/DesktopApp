@@ -56,11 +56,12 @@ public class AdminRepositoryMySQL implements AdminRepository {
     @Override
     public boolean save(User user) {
 
-        String newSql = "INSERT INTO user (username, password) VALUES (?, ?)";
+        String newSql = "INSERT INTO user (username, password, role) VALUES (?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(newSql)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getStringRoles());
 
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0;
@@ -126,7 +127,7 @@ public class AdminRepositoryMySQL implements AdminRepository {
     }
 
     @Override
-    public Notification<User> findByUsername(String username) {
+    public User findByUsername(String username) {
         String fetchUserSql = "SELECT * FROM `" + USER + "` WHERE `username` = ?";
 
         Notification<User> findByUsername = new Notification<>();
@@ -145,7 +146,7 @@ public class AdminRepositoryMySQL implements AdminRepository {
                 else
                 {
                     findByUsername.addError("Invalid username or password!");
-                    return findByUsername;
+                    return findByUsername.getResult();
                 }
 
             }
@@ -154,7 +155,7 @@ public class AdminRepositoryMySQL implements AdminRepository {
             findByUsername.addError("Something is wrong with the Database!");
         }
 
-        return findByUsername;
+        return findByUsername.getResult();
     }
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException

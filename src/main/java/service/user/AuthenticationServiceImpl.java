@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Collections;
 
-import static database.Constants.Roles.CUSTOMER;
+//import static database.Constants.Roles.CUSTOMER;
 
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -32,6 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .setUsername(username)
                 .setPassword(password)
                 .setRoles(Collections.singletonList(customerRole))
+                .setStringRoles(role)
                 .build();
 
         UserValidator userValidator = new UserValidator(user);

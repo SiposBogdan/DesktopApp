@@ -13,6 +13,7 @@ import repository.videoGame.VideoGameRepositoryCacheDecorator;
 import repository.videoGame.VideoGameRepositoryMySQL;
 import service.order.OrderService;
 import service.order.OrderServiceImpl;
+import service.user.AuthenticationService;
 import service.videoGame.VideoGameService;
 import service.videoGame.VideoGameServiceImpl;
 import view.VideoGameView;
@@ -31,19 +32,22 @@ public class EmployeeComponentFactory {
     private final OrderRepository orderRepository;
     private static volatile EmployeeComponentFactory instance;
     private static User user;
+    private final AuthenticationService authenticationService;
 
-    public static EmployeeComponentFactory getInstance(Boolean componentsForTest, Stage stage, User user) {
+    public static EmployeeComponentFactory getInstance(Boolean componentsForTest, Stage stage, User user, AuthenticationService authenticationService) {
         if (instance == null) {
             synchronized (EmployeeComponentFactory.class) {
                 if (instance == null) {
-                    instance = new EmployeeComponentFactory(componentsForTest, stage, user);
+                    instance = new EmployeeComponentFactory(componentsForTest, stage, user, authenticationService);
                 }
             }
         }
         return instance;
     }
-
-    private EmployeeComponentFactory(Boolean componentsForTest, Stage stage, User user) {
+    public static void resetInstance() {
+        instance = null;
+    }
+    private EmployeeComponentFactory(Boolean componentsForTest, Stage stage, User user, AuthenticationService authenticationService) {
         Connection connection = DatabaseConnectionFactory.getConnectionWrapper(componentsForTest).getConnection();
         this.orderRepository = new OrderRepositoryMySQL(connection);
         this.orderService = new OrderServiceImpl(orderRepository);
@@ -51,7 +55,8 @@ public class EmployeeComponentFactory {
         this.videoGameService = new VideoGameServiceImpl(videoGameRepository);
         List<VideoGameDTO> videoGameDTOs = VideoGameMapper.convertVideoGameListToVideoGameDTOList(this.videoGameService.findAll());
         this.videoGameView = new VideoGameView(stage, videoGameDTOs);
-        this.videoGameController = new VideoGameController( videoGameService, videoGameView, orderService, user);
+        this.authenticationService = authenticationService;
+        this.videoGameController = new VideoGameController( videoGameService, videoGameView, orderService, user, authenticationService);
     }
 
     public VideoGameView getVideoGameView() {

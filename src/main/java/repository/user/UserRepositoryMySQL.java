@@ -29,6 +29,7 @@ public class UserRepositoryMySQL implements UserRepository {
                 .setId(resultSet.getLong("id"))
                 .setUsername(resultSet.getString("username"))
                 .setPassword(resultSet.getString("password"))
+                .setStringRoles(resultSet.getString("stringRoles"))
                 .build();
     }
 
@@ -89,7 +90,8 @@ public class UserRepositoryMySQL implements UserRepository {
                     .prepareStatement("INSERT INTO user values (null, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             insertUserStatement.setString(1, user.getUsername());
             insertUserStatement.setString(2, user.getPassword());
-            insertUserStatement.setString(3,"customer");
+            System.out.println(user.getStringRoles());
+            insertUserStatement.setString(3, user.getStringRoles());
             insertUserStatement.executeUpdate();
 
             ResultSet rs = insertUserStatement.getGeneratedKeys();

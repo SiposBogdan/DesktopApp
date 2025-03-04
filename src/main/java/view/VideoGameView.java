@@ -44,6 +44,7 @@ public class VideoGameView {
     private Button saveButton;
     private Button deleteButton;
     private Button sellButton;
+    private Button logoutButton;
 
     public VideoGameView(Stage primaryStage, List<VideoGameDTO> videoGames) {
         primaryStage.setTitle("Store");
@@ -145,6 +146,9 @@ public class VideoGameView {
 
         sellButton = new Button("Sell");
         gridPane.add(sellButton,3,3);
+
+        logoutButton = new Button("Logout");
+        gridPane.add(logoutButton, 8, 4);
     }
     public void addSaveButtonListener(EventHandler<ActionEvent> saveButtonListener){
         saveButton.setOnAction(saveButtonListener);
@@ -156,6 +160,9 @@ public class VideoGameView {
     public void addSellButtonListener(EventHandler<ActionEvent> sellButtonListener)
     {
         sellButton.setOnAction(sellButtonListener);
+    }
+    public void addLogoutButtonListener(EventHandler<ActionEvent> logoutButtonListener) {
+        logoutButton.setOnAction(logoutButtonListener);
     }
     public void addDisplayAlertMessage(String title, String header, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -186,13 +193,21 @@ public class VideoGameView {
     {
         return Integer.parseInt(quantityTextField.getText());
     }
-
+    public void updateVideoGameToObservableList(VideoGameDTO videoGameDTO, int newStock){
+        for (VideoGameDTO game : this.videoGameObservableList) {
+            if (game.equals(videoGameDTO)) {
+                game.setStock(newStock);
+                break;
+            }
+        }
+    }
     public void addVideoGameToObservableList(VideoGameDTO videoGameDTO){
         this.videoGameObservableList.add(videoGameDTO);
     }
     public void removeVideoGameToObservableList(VideoGameDTO videoGameDTO){
         this.videoGameObservableList.remove(videoGameDTO);
     }
+
     public TableView getVideoGameTableView(){
         return videoGameTableView;
     }

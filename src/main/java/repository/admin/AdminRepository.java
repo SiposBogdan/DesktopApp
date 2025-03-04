@@ -11,7 +11,7 @@ public interface AdminRepository {
     boolean delete(User user);
     boolean generateReport();
     List<User> findAll();
-    Notification<User> findByUsername(String username);
+    User findByUsername(String username);
     Notification<Role> findRoleId(String role);
     boolean saveRole(Long userId, Long roleId);
 }
