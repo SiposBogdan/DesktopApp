@@ -34,7 +34,8 @@ public class AdminController {
 
         this.adminView.addSaveButtonListener(new AdminController.SaveButtonListener());
         this.adminView.addDeleteButtonListener(new AdminController.DeleteButtonListener());
-        this.adminView.addGenerateButtonListener(new AdminController.GenerateReportButtonListener());
+        this.adminView.addGenerateOrdersPDFButtonListener(new AdminController.GenerateOrdersReportButtonListener());
+        this.adminView.addGenerateSalesPDFButtonListener(new AdminController.GenerateSalesReportButtonListener());
         this.adminView.addLogoutButtonListener(new LogoutButtonListener());
     }
     public class SaveButtonListener implements EventHandler<ActionEvent> {
@@ -97,12 +98,24 @@ public class AdminController {
         }
     }
 
-    public class GenerateReportButtonListener implements EventHandler<ActionEvent> {
+    public class GenerateSalesReportButtonListener implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
 
-            if (pdfService.generatePDF()) {
-                adminView.addDisplayAlertMessage("Successful", "Generated pdf","");
+            if (pdfService.generateSalesPDF()) {
+                adminView.addDisplayAlertMessage("Successful", "Generated Sales pdf","");
+            } else {
+                adminView.addDisplayAlertMessage("Error", "Error at generating pdf","");
+            }
+
+        }
+    }
+    public class GenerateOrdersReportButtonListener implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+
+            if (pdfService.generateOrdersPDF()) {
+                adminView.addDisplayAlertMessage("Successful", "Generate Orders pdf","");
             } else {
                 adminView.addDisplayAlertMessage("Error", "Error at generating pdf","");
             }

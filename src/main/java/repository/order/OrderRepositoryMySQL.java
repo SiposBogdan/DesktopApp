@@ -1,10 +1,10 @@
 package repository.order;
 
 import model.Order;
+import model.builder.OrderBuilder;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,8 +15,31 @@ public class OrderRepositoryMySQL implements OrderRepository{
     }
     @Override
     public List<Order> findAll() {
-        return null;
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM `order`";
+
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                Order order = new OrderBuilder()
+                        .setId(resultSet.getLong("id"))
+                        .setUserId(resultSet.getLong("user_id"))
+                        .setVideoGameTitle(resultSet.getString("video_game_title"))
+                        .setVideoGamePublisher(resultSet.getString("video_game_publisher"))
+                        .setTimestamp(resultSet.getTimestamp("timestamp"))
+                        .setQuantity(resultSet.getInt("quantity"))
+                        .build();
+
+                    orders.add(order);
+                }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
+
 
     @Override
     public Optional<Order> findById(Long id) {

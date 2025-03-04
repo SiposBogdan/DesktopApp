@@ -2,6 +2,7 @@ package service.PDFGenerator;
 
 import repository.pdf.PDFGenerateRepository;
 
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 
 public class PDFServiceImpl implements PDFService{
@@ -14,8 +15,13 @@ public class PDFServiceImpl implements PDFService{
     }
 
     @Override
-    public boolean generatePDF() {
-        return generatePDF.generate();  // This will trigger the PDF generation
+    public boolean generateSalesPDF() {
+        return generatePDF.generate();
+    }
+
+    @Override
+    public boolean generateOrdersPDF() {
+        return generatePDF.generateOrdersReport();
     }
 
 }

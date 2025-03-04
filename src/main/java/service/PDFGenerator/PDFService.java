@@ -1,5 +1,8 @@
 package service.PDFGenerator;
 
+import java.io.FileNotFoundException;
+
 public interface PDFService {
-    boolean generatePDF();
+    public boolean generateSalesPDF();
+    public boolean generateOrdersPDF();
 }

@@ -32,7 +32,8 @@ public class AdminView {
 
     private Button saveButton;
     private Button deleteButton;
-    private Button generateReportButton;
+    private Button generateSalesReportButton;
+    private Button generateOrdersReportButton;
     private Button logoutButton;
 
 
@@ -110,11 +111,13 @@ public AdminView(Stage primaryStage, List<UserDTO> usersDTO) {
         deleteButton = new Button("Delete");
         gridPane.add(deleteButton, 6, 3);
 
-        generateReportButton = new Button("Generate PDF report");
-        gridPane.add(generateReportButton, 7, 3);
+        generateSalesReportButton = new Button("Generate PDF Sales report");
+        gridPane.add(generateSalesReportButton, 1, 4);
+        generateOrdersReportButton = new Button("Generate PDF Orders report");
+        gridPane.add(generateOrdersReportButton, 2, 4);
 
         logoutButton = new Button("Logout");
-        gridPane.add(logoutButton, 10, 4);
+        gridPane.add(logoutButton, 6, 4);
     }
 
     public void addSaveButtonListener(EventHandler<ActionEvent> saveButtonListener) {
@@ -125,8 +128,11 @@ public AdminView(Stage primaryStage, List<UserDTO> usersDTO) {
         deleteButton.setOnAction(deleteButtonListener);
     }
 
-    public void addGenerateButtonListener(EventHandler<ActionEvent> generateButtonListener) {
-        generateReportButton.setOnAction(generateButtonListener);
+    public void addGenerateSalesPDFButtonListener(EventHandler<ActionEvent> generateButtonListener) {
+        generateSalesReportButton.setOnAction(generateButtonListener);
+    }
+    public void addGenerateOrdersPDFButtonListener(EventHandler<ActionEvent> generateButtonListener) {
+        generateOrdersReportButton.setOnAction(generateButtonListener);
     }
     public void addLogoutButtonListener(EventHandler<ActionEvent> logoutButtonListener) {
         logoutButton.setOnAction(logoutButtonListener);
@@ -241,12 +247,19 @@ public AdminView(Stage primaryStage, List<UserDTO> usersDTO) {
         this.deleteButton = deleteButton;
     }
 
-    public Button getGenerateReportButton() {
-        return generateReportButton;
+    public Button getGenerateSalesReportButton() {
+        return generateSalesReportButton;
     }
 
-    public void setGenerateReportButton(Button generateReportButton) {
-        this.generateReportButton = generateReportButton;
+    public void setGenerateSalesReportButton(Button generateReportButton) {
+        this.generateSalesReportButton = generateReportButton;
+    }
+    public Button getGenerateOrdersReportButton() {
+        return generateOrdersReportButton;
+    }
+
+    public void setGenerateOrdersReportButton(Button generateOrdersReportButton) {
+        this.generateOrdersReportButton = generateOrdersReportButton;
     }
 
 }
