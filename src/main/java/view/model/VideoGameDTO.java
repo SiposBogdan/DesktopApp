@@ -2,6 +2,8 @@ package view.model;
 
 import javafx.beans.property.*;
 
+import java.util.Objects;
+
 public class VideoGameDTO {
      private StringProperty publisher;
 
@@ -80,5 +82,15 @@ public class VideoGameDTO {
     public void setPrice(float price)
     {
         priceProperty().set(price);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Same reference
+        if (obj == null || getClass() != obj.getClass()) return false; // Different types
+
+        VideoGameDTO that = (VideoGameDTO) obj;
+                return Objects.equals(title, that.title) &&
+                Objects.equals(publisher, that.publisher);
     }
 }

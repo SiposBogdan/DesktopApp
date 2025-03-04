@@ -1,5 +1,6 @@
 package view;
 
+import database.Constants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,13 +12,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import model.GameGenres;
 import model.User;
+import view.model.UserDTO;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AdminView {
-    private final ObservableList<User> usersObservableList;
-    private TableView<User> usersTableView;
+    private final ObservableList<UserDTO> usersObservableList;
+    private TableView<UserDTO> usersTableView;
     private TextField usernameTextField;
     private TextField passwordTextField;
     private TextField roleTextField;
@@ -29,8 +33,12 @@ public class AdminView {
     private Button saveButton;
     private Button deleteButton;
     private Button generateReportButton;
+    private Button logoutButton;
 
-    public AdminView(Stage primaryStage, List<User> users) {
+
+    private ComboBox<String> roleComboBox;
+
+public AdminView(Stage primaryStage, List<UserDTO> usersDTO) {
         primaryStage.setTitle("Library");
 
         GridPane gridPane = new GridPane();
@@ -39,7 +47,7 @@ public class AdminView {
         Scene scene = new Scene(gridPane, 720, 480);
         primaryStage.setScene(scene);
 
-        usersObservableList = FXCollections.observableArrayList(users);
+        usersObservableList = FXCollections.observableArrayList(usersDTO);
         initTableView(gridPane);
 
         initSaveOptions(gridPane);
@@ -59,10 +67,10 @@ public class AdminView {
         usersTableView.setPlaceholder(new Label("No users to display"));
 
 
-        TableColumn<User, String> usernameColumn = new TableColumn<User,String>("Username");
+        TableColumn<UserDTO, String> usernameColumn = new TableColumn<UserDTO,String>("Username");
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
-        TableColumn<User, String> roleColumn = new TableColumn<User, String>("Role");
+        TableColumn<UserDTO, String> roleColumn = new TableColumn<UserDTO, String>("Role");
         roleColumn.setCellValueFactory(new PropertyValueFactory<>("stringRoles"));
 
 
@@ -88,9 +96,12 @@ public class AdminView {
 
         roleLabel = new Label("Role");
         gridPane.add(roleLabel, 3, 1);
+        roleComboBox = new ComboBox<>();
 
-        roleTextField = new TextField();
-        gridPane.add(roleTextField, 4, 1);
+        roleComboBox.setItems(FXCollections.observableArrayList(Constants.Roles.ROLES));
+        gridPane.add(roleComboBox, 4, 1);
+//        roleTextField = new TextField();
+//        gridPane.add(roleTextField, 4, 1);
 
 
         saveButton = new Button("Save");
@@ -101,6 +112,9 @@ public class AdminView {
 
         generateReportButton = new Button("Generate PDF report");
         gridPane.add(generateReportButton, 7, 3);
+
+        logoutButton = new Button("Logout");
+        gridPane.add(logoutButton, 10, 4);
     }
 
     public void addSaveButtonListener(EventHandler<ActionEvent> saveButtonListener) {
@@ -114,6 +128,10 @@ public class AdminView {
     public void addGenerateButtonListener(EventHandler<ActionEvent> generateButtonListener) {
         generateReportButton.setOnAction(generateButtonListener);
     }
+    public void addLogoutButtonListener(EventHandler<ActionEvent> logoutButtonListener) {
+        logoutButton.setOnAction(logoutButtonListener);
+    }
+
 
     public void addDisplayAlertMessage(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -134,21 +152,28 @@ public class AdminView {
     }
     public String getRole()
     {
-        return roleTextField.getText();
+        //return roleTextField.getText();
+        System.out.println(String.valueOf(roleComboBox.getValue()));
+        return String.valueOf(roleComboBox.getValue());
     }
-    public void addUserToObservableList(User user) {
-        this.usersObservableList.add(user);
+    public void addUserToObservableList(UserDTO userDTO) {
+        this.usersObservableList.add(userDTO);
+    }
+    public void removeUserFromObservableList(UserDTO userDTO)
+    {
+
+        this.usersObservableList.remove(userDTO);
     }
 
-    public TableView<User> getUsersTableView() {
+    public TableView<UserDTO> getUsersTableView() {
         return usersTableView;
     }
 
-    public void setUsersTableView(TableView<User> usersTableView) {
+    public void setUsersTableView(TableView<UserDTO> usersTableView) {
         this.usersTableView = usersTableView;
     }
 
-    public ObservableList<User> getUsersObservableList() {
+    public ObservableList<UserDTO> getUsersObservableList() {
         return usersObservableList;
     }
 
@@ -223,6 +248,5 @@ public class AdminView {
     public void setGenerateReportButton(Button generateReportButton) {
         this.generateReportButton = generateReportButton;
     }
-
 
 }

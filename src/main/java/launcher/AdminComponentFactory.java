@@ -4,6 +4,7 @@ package launcher;
 import controller.AdminController;
 import database.DatabaseConnectionFactory;
 import javafx.stage.Stage;
+import mapper.UserMapper;
 import model.User;
 import repository.admin.AdminRepository;
 import repository.admin.AdminRepositoryMySQL;
@@ -20,7 +21,7 @@ import service.admin.AdminServiceImpl;
 import service.user.AuthenticationService;
 import service.user.AuthenticationServiceImpl;
 import view.AdminView;
-import view.model.AdminDTO;
+import view.model.UserDTO;
 
 import java.sql.Connection;
 import java.util.List;
@@ -61,8 +62,11 @@ public class AdminComponentFactory {
         this.authenticationService = new AuthenticationServiceImpl(userRepository,rightsRolesRepository);
         this.adminRepository = new AdminRepositoryMySQL(connection,authenticationService);
         this.adminService = new AdminServiceImpl(adminRepository);
-        List<User> users = this.adminService.findAll();
+        List<UserDTO> users = UserMapper.convertUserListToUserDTOLIST(this.adminService.findAll());
         this.adminView = new AdminView(stage, users);
         this.adminController = new AdminController(adminView, adminService,authenticationService,pdfGenerateService);
+    }
+    public static void resetInstance() {
+        instance = null;
     }
 }

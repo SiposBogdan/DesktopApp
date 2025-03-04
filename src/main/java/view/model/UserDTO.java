@@ -5,9 +5,26 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class AdminDTO {
+public class UserDTO {
     private StringProperty username;
     private IntegerProperty id;
+    private StringProperty stringRoles;
+
+    public String getStringRoles() {
+        return stringRolesProperty().get();
+    }
+
+    public StringProperty stringRolesProperty() {
+        if(stringRoles==null)
+        {
+            stringRoles= new SimpleStringProperty(this,"stringRoles");
+        }
+        return stringRoles;
+    }
+
+    public void setStringRoles(String stringRoles) {
+        this.stringRolesProperty().set(stringRoles);
+    }
 
     public IntegerProperty idProperty(){
         if(id==null)

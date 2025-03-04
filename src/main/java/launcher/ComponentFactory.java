@@ -7,14 +7,21 @@ import database.DatabaseConnectionFactory;
 import javafx.stage.Stage;
 
 import mapper.VideoGameMapper;
+import model.User;
+import repository.order.OrderRepository;
+import repository.order.OrderRepositoryMySQL;
 import repository.sale.SaleRepository;
 import repository.sale.SaleRepositoryMySQL;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 import repository.user.UserRepository;
 import repository.user.UserRepositoryMySQL;
+import repository.videoGame.Cache;
 import repository.videoGame.VideoGameRepository;
+import repository.videoGame.VideoGameRepositoryCacheDecorator;
 import repository.videoGame.VideoGameRepositoryMySQL;
+import service.order.OrderService;
+import service.order.OrderServiceImpl;
 import service.videoGame.VideoGameService;
 import service.videoGame.VideoGameServiceImpl;
 import view.VideoGameView;
@@ -25,48 +32,38 @@ import java.sql.Connection;
 import java.util.List;
 
 public class ComponentFactory {
-
 //    private final VideoGameView videoGameView;
 //    private final VideoGameController videoGameController;
-//
 //    private final VideoGameRepository videoGameRepository;
-//
 //    private final VideoGameService videoGameService;
+//    private final OrderService orderService;
+//    private final OrderRepository orderRepository;
+//    private static volatile ComponentFactory instance;
+//    private static User user;
 //
-//    private SaleRepository saleRepository;
-//    private RightsRolesRepository rightsRolesRepository;
-//    private UserRepository userRepository;
-//
-//    private static ComponentFactory instance;
-//
-//    public static ComponentFactory getInstance(Boolean componentsForTest, Stage primarystage){
-//        if(instance==null)
-//        {
-//            synchronized (ComponentFactory.class)
-//            {
-//                instance = new ComponentFactory(componentsForTest,primarystage);
+//    public static ComponentFactory getInstance(Boolean componentsForTest, Stage stage, User user) {
+//        if (instance == null) {
+//            synchronized (ComponentFactory.class) {
+//                if (instance == null) {
+//                    instance = new ComponentFactory(componentsForTest, stage, user);
+//                }
 //            }
 //        }
 //        return instance;
 //    }
 //
-//    public ComponentFactory(Boolean componentsForTest, Stage primarystage){
-//        Connection connection= DatabaseConnectionFactory.getConnectionWrapper(componentsForTest).getConnection();
-//        this.rightsRolesRepository=new RightsRolesRepositoryMySQL(connection);
-//        this.userRepository=new UserRepositoryMySQL(connection,rightsRolesRepository);
-//        this.videoGameRepository=new VideoGameRepositoryMySQL(connection);
-//        this.saleRepository=new SaleRepositoryMySQL(videoGameRepository,userRepository,connection);
-//        this.videoGameService=new VideoGameServiceImpl(videoGameRepository,saleRepository);
-//        List<VideoGameDTO> videoGameDTOS= VideoGameMapper.convertVideoGameListToVideoGameDTOList(videoGameService.findAll());
-//        displayVideoGameList(videoGameDTOS);
-//        this.videoGameView=new VideoGameView(primarystage,videoGameDTOS);
-//        this.videoGameController = new VideoGameController(videoGameService,videoGameView);
-//
-//
+//    private ComponentFactory(Boolean componentsForTest, Stage stage, User user) {
+//        Connection connection = DatabaseConnectionFactory.getConnectionWrapper(componentsForTest).getConnection();
+//        this.orderRepository = new OrderRepositoryMySQL(connection);
+//        this.orderService = new OrderServiceImpl(orderRepository);
+//        this.videoGameRepository = new VideoGameRepositoryCacheDecorator(new VideoGameRepositoryMySQL(connection), new Cache<>());
+//        this.videoGameService = new VideoGameServiceImpl(videoGameRepository);
+//        List<VideoGameDTO> videoGameDTOs = VideoGameMapper.convertVideoGameListToVideoGameDTOList(this.videoGameService.findAll());
+//        this.videoGameView = new VideoGameView(stage, videoGameDTOs);
+//        this.videoGameController = new VideoGameController( videoGameService, videoGameView, orderService, user);
 //    }
 //
-//
-//    public VideoGameView getVideoGameview() {
+//    public VideoGameView getVideoGameView() {
 //        return videoGameView;
 //    }
 //
@@ -84,13 +81,5 @@ public class ComponentFactory {
 //
 //    public static ComponentFactory getInstance() {
 //        return instance;
-//    }
-//    public void displayVideoGameList(List<VideoGameDTO> videoGameList) {
-//        for (VideoGameDTO videoGame : videoGameList) {
-//            System.out.println("Author: " + videoGame.getPublisher());
-//            System.out.println("Title: " + videoGame.getTitle());
-//            System.out.println("Number: " + videoGame.getNumber());
-//            System.out.println("-----------------------------");
-//        }
 //    }
 }
