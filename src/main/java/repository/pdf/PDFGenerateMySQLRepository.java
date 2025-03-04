@@ -44,6 +44,12 @@ public class PDFGenerateMySQLRepository implements PDFGenerateRepository {
                 "    user u ON o.user_id = u.id " +
                 "JOIN " +
                 "    video_game b ON o.video_game_title = b.title " +
+                "JOIN " +
+                "    user_role ur ON u.id = ur.user_id " +
+                "JOIN " +
+                "    role r ON ur.role_id = r.id " +
+                "WHERE " +
+                "    r.role = 'EMPLOYEE' " +
                 "GROUP BY " +
                 "    u.username, DATE_FORMAT(o.time_stamp, '%Y-%m') " +
                 "ORDER BY " +

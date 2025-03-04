@@ -183,14 +183,25 @@ public class VideoGameView {
         return genreComboBox.getValue();
     }
     public int getStock() {
+
+        if(stockTextField.getText().isEmpty()) {
+            return 0;
+        }
+
         return Integer.parseInt(stockTextField.getText());
     }
 
     public float getPrice() {
+        if(priceTextField.getText().isEmpty()) {
+            return 0;
+        }
         return Float.parseFloat(priceTextField.getText());
     }
     public int getQuantity()
     {
+        if(quantityTextField.getText().isEmpty()) {
+            return 0;
+        }
         return Integer.parseInt(quantityTextField.getText());
     }
     public void updateVideoGameToObservableList(VideoGameDTO videoGameDTO, int newStock){
